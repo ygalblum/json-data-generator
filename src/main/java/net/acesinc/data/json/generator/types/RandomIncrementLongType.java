@@ -29,7 +29,7 @@ public class RandomIncrementLongType extends TypeHandler {
     };
 
     private String currentRandomIncrementLongName;
-    private Map<String, IncrementParameters> namedRandomIncrementLongMap;
+    private final Map<String, IncrementParameters> namedRandomIncrementLongMap;
 
     public RandomIncrementLongType(){
         namedRandomIncrementLongMap = new HashMap<>();
@@ -38,7 +38,7 @@ public class RandomIncrementLongType extends TypeHandler {
     @Override
     public void setLaunchArguments(String[] launchArguments) {
         if (launchArguments.length < 1) {
-            return;
+            throw new IllegalArgumentException("Arguments list is too short");
         }
         currentRandomIncrementLongName = launchArguments[0];
         if (namedRandomIncrementLongMap.get(currentRandomIncrementLongName) != null) {
